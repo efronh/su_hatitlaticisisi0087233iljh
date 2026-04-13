@@ -28,9 +28,9 @@
 
         .pixel-deco-img {
             position: absolute;
-            animation: float 6s infinite ease-in-out;
+            animation: float 8s infinite ease-in-out;
             image-rendering: pixelated;
-            opacity: 0.6;
+            opacity: 0.9;
         }
 
         /* Stardew Menü Kutusu */
@@ -115,22 +115,35 @@
     </div>
 
     <script>
-        const deco = document.getElementById('deco');
-        // Arka plana ışıltı, yıldız ve arıları rastgele dağıtıyoruz
-        const backgroundImages = ['isilti.png', 'yildiz.png', 'ari.png', 'cicek.png']; 
+    const deco = document.getElementById('deco');
+    // İndirdiğin tüm pikselli resimlerin isimleri burada olmalı
+    const backgroundImages = ['isilti.png', 'yildiz.png', 'ari.png', 'cicek.png', 'kiraz.png']; 
+    
+    // SAYI: 40-50 yerine 85 tane yapıyoruz, ekran dolsun!
+    const numberOfItems = 85; 
+
+    for (let i = 0; i < numberOfItems; i++) {
+        const item = document.createElement('img');
+        item.className = 'pixel-deco-img';
         
-        for (let i = 0; i < 50; i++) {
-            const item = document.createElement('img');
-            item.className = 'pixel-deco-img';
-            item.src = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
-            item.style.left = Math.random() * 100 + '%';
-            item.style.top = Math.random() * 100 + '%';
-            // Bazı görselleri daha küçük (ışıltı gibi), bazılarını daha belirgin yapıyoruz
-            const size = (Math.random() * 20 + 30) + 'px';
-            item.style.width = size;
-            item.style.animationDelay = Math.random() * 5 + 's';
-            deco.appendChild(item);
-        }
-    </script>
+        // Rastgele bir resim seç
+        item.src = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+        
+        // KONUM: Ekranın her yerine dağıt
+        item.style.left = Math.random() * 100 + '%';
+        item.style.top = Math.random() * 100 + '%';
+        
+        // BOYUT: 40px ile 70px arası kocaman olsunlar!
+        const sizeValue = Math.floor(Math.random() * 30) + 40; 
+        item.style.width = sizeValue + 'px';
+        item.style.height = 'auto'; // Oranı koruması için
+        
+        // HAREKET: Her biri farklı zamanda uçmaya başlasın
+        item.style.animationDelay = Math.random() * 8 + 's';
+        item.style.animationDuration = (Math.random() * 4 + 6) + 's';
+        
+        deco.appendChild(item);
+    }
+</script>
 </body>
 </html>
