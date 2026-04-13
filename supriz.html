@@ -1,25 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stardew Babe Reminder 🌸💖</title>
     <style>
-        body { background-color: #ffebee; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: 'Courier New', Courier, monospace; overflow: hidden; }
-        .flower { font-size: 50px; margin: 10px; animation: bounce 2s infinite; }
-        .message { background: white; padding: 20px; border: 4px solid #ff4081; border-radius: 10px; text-align: center; box-shadow: 10px 10px 0px #ff4081; }
-        h1 { color: #ff4081; font-size: 24px; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        .pixel-art { display: grid; grid-template-columns: repeat(5, 20px); gap: 2px; margin-bottom: 20px; }
-        .dot { width: 20px; height: 20px; background-color: #4caf50; }
-        .pink { background-color: #ff80ab; }
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            background-color: #ffdae9; /* Soft Pink */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            overflow: hidden;
+        }
+
+        /* Arka Plan Süslemeleri */
+        .background-deco {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+        }
+
+        .pixel-deco-img {
+            position: absolute;
+            animation: float 6s infinite ease-in-out;
+            image-rendering: pixelated;
+            opacity: 0.6;
+        }
+
+        /* Stardew Menü Kutusu */
+        .stardew-container {
+            background-color: #4c7c3d; /* Forest Green */
+            border: 6px solid #2d4c24;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 440px;
+            position: relative;
+        }
+
+        /* Ana İkonlar Area */
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .main-pixel-img {
+            width: 55px;
+            height: 55px;
+            image-rendering: pixelated;
+        }
+
+        .heart-img {
+            animation: heartbeat 1.2s infinite;
+            width: 65px;
+            height: 65px;
+        }
+
+        /* Enerji Barı */
+        .energy-bar-container {
+            width: 50px; height: 150px;
+            background: #222; border: 3px solid #fff;
+            position: absolute; right: -65px; bottom: 0;
+            display: flex; flex-direction: column-reverse;
+        }
+
+        .energy-fill {
+            width: 100%;
+            background: #4ef064;
+            animation: fillEnergy 3s infinite alternate ease-in-out;
+        }
+
+        h1 { color: #fff; font-size: 18px; line-height: 1.6; text-shadow: 3px 3px #2d4c24; margin: 10px 0; }
+        .pixel-msg { font-size: 11px; color: #d1ffbd; line-height: 2; margin-bottom: 20px; }
+        .footer { font-size: 8px; color: #a8d59d; border-top: 2px dashed #a8d59d; padding-top: 15px; margin-top: 10px; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes fillEnergy { 0% { height: 10%; background: #ff4d4d; } 100% { height: 100%; background: #4ef064; } }
     </style>
 </head>
 <body>
-    <div class="flower">🌸 🌷 🌸</div>
-    <div class="message">
-        <h1>Su içme vakti geldi! 💧</h1>
-        <p>Günde 1.5 litre içersen 25 puan veririm;)</p>
-        <p style="font-size: 12px; color: #888;">ily - eft</p>
+
+    <div class="background-deco" id="deco"></div>
+
+    <div class="stardew-container">
+        <div class="energy-bar-container"><div class="energy-fill"></div></div>
+
+        <div class="icon-container">
+            <img src="cicek.png" class="main-pixel-img" alt="cicek">
+            <img src="kalp.png" class="main-pixel-img heart-img" alt="kalp">
+            <img src="kiraz.png" class="main-pixel-img" alt="kiraz">
+        </div>
+
+        <h1>BABE SU İÇ!!! ✨🌸</h1>
+        
+        <div class="pixel-msg">
+            GÜNDE 1.5 LİTRE SU<br>
+            +25 PUAN ;)
+        </div>
+        
+        <div class="footer">
+            LEVEL: SOULMATE 💖
+        </div>
     </div>
-    <div class="flower">🌸 🌷 🌸</div>
+
+    <script>
+        const deco = document.getElementById('deco');
+        // Arka plana ışıltı, yıldız ve arıları rastgele dağıtıyoruz
+        const backgroundImages = ['isilti.png', 'yildiz.png', 'ari.png', 'cicek.png']; 
+        
+        for (let i = 0; i < 50; i++) {
+            const item = document.createElement('img');
+            item.className = 'pixel-deco-img';
+            item.src = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+            item.style.left = Math.random() * 100 + '%';
+            item.style.top = Math.random() * 100 + '%';
+            // Bazı görselleri daha küçük (ışıltı gibi), bazılarını daha belirgin yapıyoruz
+            const size = (Math.random() * 15 + 15) + 'px';
+            item.style.width = size;
+            item.style.animationDelay = Math.random() * 5 + 's';
+            deco.appendChild(item);
+        }
+    </script>
 </body>
 </html>
